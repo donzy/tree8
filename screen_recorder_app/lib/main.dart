@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:window_manager/window_manager.dart';
+import 'package:screen_retriever/screen_retriever.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -142,9 +143,9 @@ class _RecorderHomePageState extends State<RecorderHomePage> {
   }
 
   Future<void> _switchToFloatingWindow() async {
-    final screenSize = await windowManager.getPrimaryDisplay();
-    final screenWidth = screenSize.workArea.size.width;
-    final screenHeight = screenSize.workArea.size.height;
+    final primaryDisplay = await screenRetriever.getPrimaryDisplay();
+    final screenWidth = primaryDisplay.size.width;
+    final screenHeight = primaryDisplay.size.height;
     
     // Set window to circular floating window in bottom right corner
     await windowManager.setSize(const Size(120, 120));
